@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Management;
+using System.Net.NetworkInformation;
 
 namespace L6POC
 {
@@ -36,6 +37,9 @@ namespace L6POC
         //Video Fields
         public static string VideoName { get; set; }
         public static string VideoResolution { get; set; }
+
+        //Network Fields
+        public static string NetworkIPAddress { get; set; }
 
         public static void PullSysInfo()
         {
@@ -106,6 +110,27 @@ namespace L6POC
 
         static void PullNetworkInfo()
         {
+            /*
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"
+                SELECT ServiceName
+                FROM Win32_NetworkAdapterConfiguration
+                WHERE ServiceName IS NOT NULL");
+            ManagementObjectCollection manObjCollection = searcher.Get();
+            
+            foreach (ManagementObject value in manObjCollection)
+            {
+                NetworkIPAddress = value["ServiceName"].ToString();
+            }
+            */
+
+            NetworkInterface[] network = NetworkInterface.GetAllNetworkInterfaces();
+
+            foreach (NetworkInterface item in network)
+            {
+                NetworkIPAddress = item.GetPhysicalAddress().ToString();
+            }
+
+
 
         }
 

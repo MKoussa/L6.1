@@ -32,7 +32,9 @@ namespace L6POC
                 "HDD Free Space:",
                 "******************************",
                 "Video Name:",
-                "Video Resolution:"};
+                "Video Resolution:",
+                "******************************",
+                "Network IP Address:"};
 
             string[] values = {
                 ComputerInformation.ProcessorName,
@@ -48,7 +50,9 @@ namespace L6POC
                 ComputerInformation.HDDFreeSpace,
                 "******************************",
                 ComputerInformation.VideoName,
-                ComputerInformation.VideoResolution};
+                ComputerInformation.VideoResolution,
+                "******************************",
+                ComputerInformation.NetworkIPAddress};
 
             Console.WriteLine("{0, -30} {1}", "Name", "Value");
             Console.WriteLine("--------------------------------------------------------------------------------");
