@@ -10,3 +10,9 @@ C:\L6\obj\Debug\L6POC.pdb
 C:\L6\obj\Debug\L6POC.csprojResolveAssemblyReference.cache
 C:\L6\bin\Debug\L6POC.exe
 C:\L6\bin\Debug\L6POC.pdb
+C:\L6.1\bin\Debug\L6POC.exe.config
+C:\L6.1\obj\Debug\L6POC.exe
+C:\L6.1\obj\Debug\L6POC.pdb
+C:\L6.1\bin\Debug\L6POC.exe
+C:\L6.1\bin\Debug\L6POC.pdb
+C:\L6.1\obj\Debug\L6POC.csprojResolveAssemblyReference.cache

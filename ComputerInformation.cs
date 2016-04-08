@@ -25,8 +25,13 @@ namespace L6POC
                 memCap = (memCap / 1024) / 1024;
             }
         }
-
         public static string MemorySpeed { get; set; }
+
+        //HDD Fields
+        public static string HDDModel { get; set; }
+        public static string HDDDriveLetter { get; set; }
+        public static string HDDCapacity { get; set; }
+        public static string HDDFreeSpace { get; set; }
 
         //Video Fields
         public static string VideoName { get; set; }
@@ -73,6 +78,29 @@ namespace L6POC
 
         static void PullHDDInfo()
         {
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"
+                SELECT Model
+                FROM Win32_DiskDrive");
+            ManagementObjectCollection manObjCollection = searcher.Get();
+
+            foreach (ManagementObject value in manObjCollection)
+            {
+                HDDModel += value["Model"].ToString() + " ";
+            }
+
+            searcher = new ManagementObjectSearcher(@"
+                SELECT DriveLetter, Capacity, FreeSpace
+                FROM Win32_Volume
+                WHERE DriveLetter IS NOT NULL");
+            manObjCollection = searcher.Get();
+
+            foreach (ManagementObject value in manObjCollection)
+            {
+                HDDDriveLetter += value["DriveLetter"].ToString() + " ";
+                HDDCapacity += value["Capacity"].ToString() + " ";
+                HDDFreeSpace += value["FreeSpace"].ToString() + " ";
+            }
+
 
         }
 
@@ -90,7 +118,7 @@ namespace L6POC
                 FROM Win32_VideoController");
             ManagementObjectCollection manObjCollection = searcher.Get();
 
-            foreach(ManagementObject value in manObjCollection)
+            foreach (ManagementObject value in manObjCollection)
             {
                 VideoName = value["Name"].ToString();
                 VideoResolution = value["CurrentHorizontalResolution"].ToString() + " x " + value["CurrentVerticalResolution"].ToString();

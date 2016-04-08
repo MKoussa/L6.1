@@ -22,8 +22,15 @@ namespace L6POC
             string[] names = {"Processor Name:",
                 "Processor Core Count:",
                 "Processor Logical Processors:",
+                "******************************",
                 "Memory Capacity:",
                 "Memory Speed:",
+                "******************************",
+                "HDD Model:",
+                "HDD Drive Letter(s):",
+                "HDD Capacity:",
+                "HDD Free Space:",
+                "******************************",
                 "Video Name:",
                 "Video Resolution:"};
 
@@ -31,8 +38,15 @@ namespace L6POC
                 ComputerInformation.ProcessorName,
                 ComputerInformation.ProcessorNumberOfCores,
                 ComputerInformation.ProcessorNumberOfLogicalProcessors,
+                "******************************",
                 ComputerInformation.MemoryCapacity,
                 ComputerInformation.MemorySpeed,
+                "******************************",
+                ComputerInformation.HDDModel,
+                ComputerInformation.HDDDriveLetter,
+                ComputerInformation.HDDCapacity,
+                ComputerInformation.HDDFreeSpace,
+                "******************************",
                 ComputerInformation.VideoName,
                 ComputerInformation.VideoResolution};
 
