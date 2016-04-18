@@ -1,15 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 using System.Management;
-using System.Net.NetworkInformation;
+using System.Management.Automation;
+using System.Net;
 
 namespace L6POC
 {
     static class ComputerInformation
     {
+        //System Fields
+        public static string SystemManufacturer { get; set; }
+        public static string SystemModel { get; set; }
+        public static string SystemSerial { get; set; }
+
+        //OS Fields
+        public static string OSName { get; set; }
+        public static string OSArchitecture { get; set; }
+
         //Processor Fields
         public static string ProcessorName { get; set; }
         public static string ProcessorNumberOfCores { get; set; }
@@ -17,15 +24,7 @@ namespace L6POC
 
         //Memory Fields
         private static double memCap;
-        public static string MemoryCapacity
-        {
-            get { return memCap.ToString() + "MB"; }
-            set
-            {
-                memCap = Convert.ToDouble(value);
-                memCap = (memCap / 1024) / 1024;
-            }
-        }
+        public static string MemoryCapacity { get; set; }
         public static string MemorySpeed { get; set; }
 
         //HDD Fields
@@ -39,15 +38,37 @@ namespace L6POC
         public static string VideoResolution { get; set; }
 
         //Network Fields
+        public static string NetworkDescription { get; set; }
         public static string NetworkIPAddress { get; set; }
+        public static string NetworkSubnet { get; set; }
+        public static string NetworkGateway { get; set; }
+        public static string NetworkDHCPServer { get; set; }
+        public static string NetworkDNSDomain { get; set; }
+        public static string NetworkPublicIPAddress { get; set; }
 
         public static void PullSysInfo()
         {
+            PullOSInfo();
             PullCPUInfo();
             PullRAMInfo();
             PullHDDInfo();
-            PullNetworkInfo();
             PullVideoInfo();
+            PullNetworkInfo();
+        }
+
+        static void PullOSInfo()
+        {
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"
+                SELECT Caption, OSArchitecture
+                FROM Win32_OperatingSystem");
+            ManagementObjectCollection manObjCollection = searcher.Get();
+
+            foreach (ManagementObject value in manObjCollection)
+            {
+                OSName = value["Caption"].ToString();
+                OSArchitecture = value["OSArchitecture"].ToString();
+            }
+
         }
 
         static void PullCPUInfo()
@@ -75,7 +96,7 @@ namespace L6POC
 
             foreach (ManagementObject value in manObjCollection)
             {
-                MemoryCapacity = value["Capacity"].ToString();
+                MemoryCapacity = convertToMB(value["Capacity"].ToString());
                 MemorySpeed = value["Speed"].ToString() + "mhz";
             }
         }
@@ -101,35 +122,9 @@ namespace L6POC
             foreach (ManagementObject value in manObjCollection)
             {
                 HDDDriveLetter += value["DriveLetter"].ToString() + " ";
-                HDDCapacity += value["Capacity"].ToString() + " ";
-                HDDFreeSpace += value["FreeSpace"].ToString() + " ";
+                HDDCapacity += convertToGB(value["Capacity"].ToString()) + " ";
+                HDDFreeSpace += convertToGB(value["FreeSpace"].ToString()) + " ";
             }
-
-
-        }
-
-        static void PullNetworkInfo()
-        {
-            /*
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"
-                SELECT ServiceName
-                FROM Win32_NetworkAdapterConfiguration
-                WHERE ServiceName IS NOT NULL");
-            ManagementObjectCollection manObjCollection = searcher.Get();
-            
-            foreach (ManagementObject value in manObjCollection)
-            {
-                NetworkIPAddress = value["ServiceName"].ToString();
-            }
-            */
-
-            NetworkInterface[] network = NetworkInterface.GetAllNetworkInterfaces();
-
-            foreach (NetworkInterface item in network)
-            {
-                NetworkIPAddress = item.GetPhysicalAddress().ToString();
-            }
-
 
 
         }
@@ -149,5 +144,87 @@ namespace L6POC
                 VideoResolution = value["CurrentHorizontalResolution"].ToString() + " x " + value["CurrentVerticalResolution"].ToString();
             }
         }
+
+        static void PullNetworkInfo()
+        {
+            
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"
+                SELECT Description, 
+                       IPAddress, 
+                       IPSubnet, 
+                       DefaultIPGateway, 
+                       DHCPServer,
+                       DNSDomain
+                FROM Win32_NetworkAdapterConfiguration
+                WHERE IPEnabled = 'true'");
+            ManagementObjectCollection manObjCollection = searcher.Get();
+            
+            foreach (ManagementObject value in manObjCollection)
+            {
+                NetworkDescription = value["Description"].ToString();
+
+                string[] tempString = (string[])value["IPAddress"];
+                NetworkIPAddress = tempString[0].ToString();
+
+                tempString = (string[])value["IPSubnet"];
+                NetworkSubnet = tempString[0];
+
+                tempString = (string[])value["DefaultIPGateway"];
+                NetworkGateway = tempString[0].ToString();
+
+                NetworkDHCPServer = value["DHCPServer"].ToString();
+                NetworkDNSDomain = value["DNSDomain"].ToString();
+
+            }
+            
+            using (WebClient client = new WebClient())
+            {
+                NetworkPublicIPAddress = client.DownloadString("http://checkip.amazonaws.com/");
+            }
+
+            /*
+            NetworkInterface[] network = NetworkInterface.GetAllNetworkInterfaces();
+
+            foreach (NetworkInterface item in network)
+            {
+                NetworkIPAddress = item.GetPhysicalAddress().ToString();
+            }
+
+            using (PowerShell ps = PowerShell.Create())
+            {
+                ps.AddScript("get-netadapter | Where-Object {$_.status -eq \"Up\"} | Get-NetIPAddress");
+
+                Collection<PSObject> output = ps.Invoke();
+
+                foreach (dynamic result in output)
+                {
+                    if (result != null)
+                    {
+                        NetworkIPAddress = result.IPv4Address;
+                    }
+                }
+
+
+            }
+
+            */
+
+
+        }
+
+        static string convertToGB(string value)
+        {
+            double num = double.Parse(value);
+            num = ((num / 1024) / 1024) / 1024;
+            return Math.Round(num, 2).ToString() + "GB";
+        }
+
+        static string convertToMB(string value)
+        {
+            double num = double.Parse(value);
+            num = (num / 1024) / 1024;
+            return Math.Round(num, 2).ToString() + "MB";
+        }
+
     }
 }

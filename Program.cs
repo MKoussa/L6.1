@@ -19,46 +19,68 @@ namespace L6POC
 
         static void printComputerInfo()
         {
-            string[] names = {"Processor Name:",
+            string[] names = {
+                "- - - - -",
+                "OS Name:",
+                "OS Architecture:",
+                "- - - - -",
+                "Processor Name:",
                 "Processor Core Count:",
                 "Processor Logical Processors:",
-                "******************************",
+                "- - - - -",
                 "Memory Capacity:",
                 "Memory Speed:",
-                "******************************",
+                "- - - - -",
                 "HDD Model:",
                 "HDD Drive Letter(s):",
                 "HDD Capacity:",
                 "HDD Free Space:",
-                "******************************",
+                "- - - - -",
                 "Video Name:",
                 "Video Resolution:",
-                "******************************",
-                "Network IP Address:"};
+                "- - - - -",
+                "Network Description:",
+                "IP Address:",
+                "Subnet:",
+                "Gateway:",
+                "DHCP Server:",
+                "DNS Domain:",
+                "Public IP Address:",
+                "- - - - -"};
 
             string[] values = {
+                "- - - - -",
+                ComputerInformation.OSName,
+                ComputerInformation.OSArchitecture,
+                "- - - - -",
                 ComputerInformation.ProcessorName,
                 ComputerInformation.ProcessorNumberOfCores,
                 ComputerInformation.ProcessorNumberOfLogicalProcessors,
-                "******************************",
+                "- - - - -",
                 ComputerInformation.MemoryCapacity,
                 ComputerInformation.MemorySpeed,
-                "******************************",
+                "- - - - -",
                 ComputerInformation.HDDModel,
                 ComputerInformation.HDDDriveLetter,
                 ComputerInformation.HDDCapacity,
                 ComputerInformation.HDDFreeSpace,
-                "******************************",
+                "- - - - -",
                 ComputerInformation.VideoName,
                 ComputerInformation.VideoResolution,
-                "******************************",
-                ComputerInformation.NetworkIPAddress};
+                "- - - - -",
+                ComputerInformation.NetworkDescription,
+                ComputerInformation.NetworkIPAddress,
+                ComputerInformation.NetworkSubnet,
+                ComputerInformation.NetworkGateway,
+                ComputerInformation.NetworkDHCPServer,
+                ComputerInformation.NetworkDNSDomain,
+                ComputerInformation.NetworkPublicIPAddress,
+                "- - - - -" };
 
-            Console.WriteLine("{0, -30} {1}", "Name", "Value");
-            Console.WriteLine("--------------------------------------------------------------------------------");
+            Console.WriteLine("{0, 30}", "L6");
             for(int i = 0; i < names.Length; i++)
             {
-                Console.WriteLine("{0, -30} {1}", names[i], values[i]);
+                Console.WriteLine("{0, 30} {1}", names[i], values[i]);
             }
             Console.ReadLine();
         }
