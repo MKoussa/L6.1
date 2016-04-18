@@ -16,3 +16,10 @@ C:\L6.1\obj\Debug\L6POC.pdb
 C:\L6.1\bin\Debug\L6POC.exe
 C:\L6.1\bin\Debug\L6POC.pdb
 C:\L6.1\obj\Debug\L6POC.csprojResolveAssemblyReference.cache
+D:\L6.1\bin\Debug\L6POC.exe.config
+D:\L6.1\obj\Debug\L6POC.exe
+D:\L6.1\obj\Debug\L6POC.pdb
+D:\L6.1\bin\Debug\L6POC.exe
+D:\L6.1\bin\Debug\L6POC.pdb
+D:\L6.1\obj\Debug\L6POC.csprojResolveAssemblyReference.cache
+D:\L6.1\bin\Debug\System.Management.Automation.dll
