@@ -23,7 +23,6 @@ namespace L6POC
         public static string ProcessorNumberOfLogicalProcessors { get; set; }
 
         //Memory Fields
-        private static double memCap;
         public static string MemoryCapacity { get; set; }
         public static string MemorySpeed { get; set; }
 
