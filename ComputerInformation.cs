@@ -13,6 +13,10 @@ namespace L6POC
         public static string SystemModel { get; set; }
         public static string SystemSerial { get; set; }
 
+        //Computer Fields
+        public static string ComputerName { get; set; }
+        public static string ComputerDomain { get; set; }
+
         //OS Fields
         public static string OSName { get; set; }
         public static string OSArchitecture { get; set; }
@@ -45,14 +49,41 @@ namespace L6POC
         public static string NetworkDNSDomain { get; set; }
         public static string NetworkPublicIPAddress { get; set; }
 
-        public static void PullSysInfo()
+        public static void PullAllInfo()
         {
+            PullSystemInfo();
             PullOSInfo();
             PullCPUInfo();
             PullRAMInfo();
             PullHDDInfo();
             PullVideoInfo();
             PullNetworkInfo();
+        }
+
+        static void PullSystemInfo()
+        {
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"
+                SELECT Manufacturer, Model, Name, Domain
+                FROM Win32_ComputerSystem");
+            ManagementObjectCollection manObjCollection = searcher.Get();
+
+            foreach (ManagementObject value in manObjCollection)
+            {
+                SystemManufacturer = value["Manufacturer"].ToString();
+                SystemModel = value["Model"].ToString();
+                ComputerName = value["Name"].ToString();
+                ComputerDomain = value["Domain"].ToString();
+            }
+
+            searcher = new ManagementObjectSearcher(@"
+                SELECT SerialNumber
+                FROM Win32_BIOS");
+            manObjCollection = searcher.Get();
+
+            foreach (ManagementObject value in manObjCollection)
+            {
+                SystemSerial = value["SerialNumber"].ToString();
+            }
         }
 
         static void PullOSInfo()

@@ -11,7 +11,7 @@ namespace L6POC
     {
         static void Main(string[] args)
         {
-            ComputerInformation.PullSysInfo();
+            ComputerInformation.PullAllInfo();
             printComputerInfo();
 
             
@@ -20,6 +20,13 @@ namespace L6POC
         static void printComputerInfo()
         {
             string[] names = {
+                "- - - - -",
+                "Manufacturer:",
+                "Model Number:",
+                "Serial Number:",
+                "- - - - -",
+                "Computer Name:",
+                "Domain:",
                 "- - - - -",
                 "OS Name:",
                 "OS Architecture:",
@@ -49,6 +56,13 @@ namespace L6POC
                 "- - - - -"};
 
             string[] values = {
+                "- - - - -",
+                ComputerInformation.SystemManufacturer,
+                ComputerInformation.SystemModel,
+                ComputerInformation.SystemSerial,
+                "- - - - -",
+                ComputerInformation.ComputerName,
+                ComputerInformation.ComputerDomain,
                 "- - - - -",
                 ComputerInformation.OSName,
                 ComputerInformation.OSArchitecture,
