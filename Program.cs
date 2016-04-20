@@ -33,7 +33,7 @@ namespace L6POC
                 "- - - - -",
                 "Processor Name:",
                 "Processor Core Count:",
-                "Processor Logical Processors:",
+                "Logical Processors:",
                 "- - - - -",
                 "Memory Capacity:",
                 "Memory Speed:",
