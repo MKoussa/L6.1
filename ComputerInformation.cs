@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Management;
 using System.Management.Automation;
 using System.Net;
@@ -20,6 +21,9 @@ namespace L6POC
         //OS Fields
         public static string OSName { get; set; }
         public static string OSArchitecture { get; set; }
+
+        //AV Fields
+        public static string AVName { get; set; }
 
         //Processor Fields
         public static string ProcessorName { get; set; }
@@ -53,6 +57,7 @@ namespace L6POC
         {
             PullSystemInfo();
             PullOSInfo();
+            PullAVInfo();
             PullCPUInfo();
             PullRAMInfo();
             PullHDDInfo();
@@ -99,6 +104,27 @@ namespace L6POC
                 OSArchitecture = value["OSArchitecture"].ToString();
             }
 
+        }
+
+        static void PullAVInfo()
+        {
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher(
+                "root\\SecurityCenter2",
+                "SELECT displayName " +
+                "FROM AntiVirusProduct");
+            ManagementObjectCollection moc = searcher.Get();
+
+            NameValueCollection mnvc = new NameValueCollection();
+
+            foreach (ManagementObject value in moc)
+            {
+                foreach (PropertyData pd in value.Properties)
+                {
+                    mnvc.Add(pd.Name.ToString(), pd.Value.ToString());
+                }
+            }
+
+            AVName = mnvc.Get("displayName");
         }
 
         static void PullCPUInfo()
