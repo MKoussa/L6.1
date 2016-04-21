@@ -14,6 +14,8 @@ Here is a sample output:
                 Computer Name: YAGOBA
                        Domain: WORKGROUP
                      - - - - - - - - - -
+                    AntiVirus: Windows Defender
+                     - - - - - - - - - -
                       OS Name: Microsoft Windows 8.1 Pro
               OS Architecture: 64-bit
                      - - - - - - - - - -
@@ -38,9 +40,9 @@ Here is a sample output:
                       Gateway: 192.168.1.1
                   DHCP Server: 192.168.1.125
                    DNS Domain: sampleDomain.local
-            Public IP Address: 8.8.8.8
-
-                     - - - - - - - - - -
+            Public IP Address: 8.8.8.8 
+                     - - - - - - - - - - 
+                     
 
 
 Please feel free to recommend any extra fields that would be useful!
