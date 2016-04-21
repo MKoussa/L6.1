@@ -9,7 +9,7 @@ Here is a sample output:
                      - - - - - - - - - -
                  Manufacturer: LENOVO
                  Model Number: 33472HU
-                Serial Number: [Intentionally Left Blank]
+                Serial Number: 123RLSRL
                      - - - - - - - - - -
                 Computer Name: YAGOBA
                        Domain: WORKGROUP
@@ -19,7 +19,7 @@ Here is a sample output:
                      - - - - - - - - - -
                Processor Name: Intel(R) Core(TM) i5-3317U CPU @ 1.70GHz
          Processor Core Count: 2
- Processor Logical Processors: 4
+           Logical Processors: 4
                      - - - - - - - - - -
               Memory Capacity: 4096MB
                  Memory Speed: 1333mhz
@@ -37,9 +37,10 @@ Here is a sample output:
                        Subnet: 255.255.255.0
                       Gateway: 192.168.1.1
                   DHCP Server: 192.168.1.125
-                   DNS Domain: [Intentionally Left Blank]
-            Public IP Address: [Intentionally Left Blank]
+                   DNS Domain: sampleDomain.local
+            Public IP Address: 8.8.8.8
 
                      - - - - - - - - - -
+
 
 Please feel free to recommend any extra fields that would be useful!
