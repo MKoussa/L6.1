@@ -26,3 +26,4 @@ D:\L6.1\obj\Debug\L6POC.exe.manifest
 D:\L6.1\obj\Debug\L6POC.application
 D:\L6.1\obj\Debug\L6POC.exe
 D:\L6.1\obj\Debug\L6POC.pdb
+D:\L6.1\obj\Debug\L6POC.csprojResolveAssemblyReference.cache

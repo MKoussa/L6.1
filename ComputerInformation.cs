@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.Management;
 using System.Management.Automation;
 using System.Net;
@@ -52,6 +53,15 @@ namespace L6POC
         public static string NetworkDHCPServer { get; set; }
         public static string NetworkDNSDomain { get; set; }
         public static string NetworkPublicIPAddress { get; set; }
+
+        public static void RunMSInfo32()
+        {
+            Process prcs = new Process();
+            ProcessStartInfo msi32 = new ProcessStartInfo();
+            msi32.FileName = "MSInfo32.exe";
+            prcs.StartInfo = msi32;
+            prcs.Start();          
+        }
 
         public static void PullAllInfo()
         {
@@ -237,35 +247,6 @@ namespace L6POC
             {
                 NetworkPublicIPAddress = client.DownloadString("http://checkip.amazonaws.com/");
             }
-
-            /*
-            NetworkInterface[] network = NetworkInterface.GetAllNetworkInterfaces();
-
-            foreach (NetworkInterface item in network)
-            {
-                NetworkIPAddress = item.GetPhysicalAddress().ToString();
-            }
-
-            using (PowerShell ps = PowerShell.Create())
-            {
-                ps.AddScript("get-netadapter | Where-Object {$_.status -eq \"Up\"} | Get-NetIPAddress");
-
-                Collection<PSObject> output = ps.Invoke();
-
-                foreach (dynamic result in output)
-                {
-                    if (result != null)
-                    {
-                        NetworkIPAddress = result.IPv4Address;
-                    }
-                }
-
-
-            }
-
-            */
-
-
         }
 
         static string convertToGB(string value)
