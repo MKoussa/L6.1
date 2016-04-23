@@ -100,6 +100,7 @@
     <Compile Include="ComputerInformation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WindowsTools.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

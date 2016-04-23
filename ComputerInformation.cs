@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Diagnostics;
 using System.Management;
-using System.Management.Automation;
 using System.Net;
 
 namespace L6POC
@@ -53,15 +50,6 @@ namespace L6POC
         public static string NetworkDHCPServer { get; set; }
         public static string NetworkDNSDomain { get; set; }
         public static string NetworkPublicIPAddress { get; set; }
-
-        public static void RunMSInfo32()
-        {
-            Process prcs = new Process();
-            ProcessStartInfo msi32 = new ProcessStartInfo();
-            msi32.FileName = "MSInfo32.exe";
-            prcs.StartInfo = msi32;
-            prcs.Start();          
-        }
 
         public static void PullAllInfo()
         {

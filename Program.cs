@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Management;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace L6POC
 {
@@ -15,27 +8,8 @@ namespace L6POC
         {
             ComputerInformation.PullAllInfo();
             printComputerInfo();
+            ProcessInputOptions();
 
-            Console.Write("{0, 31}", "More Info? [Y] Yes [X] Exit: ");
-            string input = Console.ReadLine();
-
-            while (!input.ToLower().Equals("x"))
-            {
-                if (input.ToLower().Equals("y"))
-                {
-                    ComputerInformation.RunMSInfo32();
-                    input = "";
-                } 
-                else if (input.ToLower().Equals("x"))
-                {
-                    System.Environment.Exit(0);
-                }
-                else
-                {
-                    Console.Write("{0, 31}", "More Info? [Y] Yes [X] Exit: ");
-                    input = Console.ReadLine();
-                }
-            }
         }
 
         static void printComputerInfo()
@@ -120,6 +94,44 @@ namespace L6POC
             for(int i = 0; i < names.Length; i++)
             {
                 Console.WriteLine("{0, 30} {1}", names[i], values[i]);
+            }
+        }
+
+        static void ProcessInputOptions()
+        {
+            Console.WriteLine("{0, 30} {1}", "DXDiag:", "[D]");
+            Console.WriteLine("{0, 30} {1}", "MSInfo32:", "[M]");
+            Console.WriteLine("{0, 30} {1}", "Disk Management:", "[K]");
+            Console.WriteLine("{0, 30} {1}", "Exit:", "[X]");
+            Console.Write("\n{0, 32}", "Select:  ");
+            string input = Console.ReadLine();
+
+            while (!input.ToLower().Equals("x"))
+            {
+                if (input.ToLower().Equals("m"))
+                {
+                    WindowsTools.RunMSInfo32();
+                    input = "";
+                }
+                else if (input.ToLower().Equals("d"))
+                {
+                    WindowsTools.RunDXDiag();
+                    input = "";
+                }
+                else if (input.ToLower().Equals("k"))
+                {
+                    WindowsTools.RunDiskMGMT();
+                    input = "";
+                }
+                else if (input.ToLower().Equals("x"))
+                {
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    Console.Write("{0, 31}", "Select: ");
+                    input = Console.ReadLine();
+                }
             }
         }
     }
