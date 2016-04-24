@@ -12,27 +12,45 @@ namespace L6POC
         public static void RunMSInfo32()
         {
             Process prcs = new Process();
-            ProcessStartInfo msi32 = new ProcessStartInfo();
-            msi32.FileName = "MSInfo32.exe";
-            prcs.StartInfo = msi32;
+            ProcessStartInfo psi = new ProcessStartInfo();
+            psi.FileName = "MSInfo32.exe";
+            prcs.StartInfo = psi;
             prcs.Start();
         }
 
         public static void RunDXDiag()
         {
             Process prcs = new Process();
-            ProcessStartInfo msi32 = new ProcessStartInfo();
-            msi32.FileName = "DXDiag.exe";
-            prcs.StartInfo = msi32;
+            ProcessStartInfo psi = new ProcessStartInfo();
+            psi.FileName = "DXDiag.exe";
+            prcs.StartInfo = psi;
             prcs.Start();
         }
 
         public static void RunDiskMGMT()
         {
             Process prcs = new Process();
-            ProcessStartInfo msi32 = new ProcessStartInfo();
-            msi32.FileName = "DiskMGMT.msc";
-            prcs.StartInfo = msi32;
+            ProcessStartInfo psi = new ProcessStartInfo();
+            psi.FileName = "DiskMGMT.msc";
+            prcs.StartInfo = psi;
+            prcs.Start();
+        }
+
+        public static void RunCleanManager()
+        {
+            Process prcs = new Process();
+            ProcessStartInfo psi = new ProcessStartInfo();
+            psi.FileName = "Cleanmgr.exe";
+            prcs.StartInfo = psi;
+            prcs.Start();
+        } 
+
+        public static void RunInternetProperties()
+        {
+            Process prcs = new Process();
+            ProcessStartInfo psi = new ProcessStartInfo();
+            psi.FileName = "Inetcpl.cpl";
+            prcs.StartInfo = psi;
             prcs.Start();
         }
     }

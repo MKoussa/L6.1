@@ -90,7 +90,7 @@ namespace L6POC
                 ComputerInformation.NetworkPublicIPAddress,
                 "- - - - -" };
 
-            Console.WriteLine("{0, 30}", "L6");
+            Console.WriteLine("{0, 30} {1}", "L6", "MKoussa");
             for(int i = 0; i < names.Length; i++)
             {
                 Console.WriteLine("{0, 30} {1}", names[i], values[i]);
@@ -102,6 +102,8 @@ namespace L6POC
             Console.WriteLine("{0, 30} {1}", "DXDiag:", "[D]");
             Console.WriteLine("{0, 30} {1}", "MSInfo32:", "[M]");
             Console.WriteLine("{0, 30} {1}", "Disk Management:", "[K]");
+            Console.WriteLine("{0, 30} {1}", "Disk Cleanup:", "[C]");
+            Console.WriteLine("{0, 30} {1}", "Internet Properties:", "[I]");
             Console.WriteLine("{0, 30} {1}", "Exit:", "[X]");
             Console.Write("\n{0, 32}", "Select:  ");
             string input = Console.ReadLine();
@@ -123,13 +125,23 @@ namespace L6POC
                     WindowsTools.RunDiskMGMT();
                     input = "";
                 }
+                else if (input.ToLower().Equals("c"))
+                {
+                    WindowsTools.RunCleanManager();
+                    input = "";
+                }
+                else if (input.ToLower().Equals("i"))
+                {
+                    WindowsTools.RunInternetProperties();
+                    input = "";
+                }
                 else if (input.ToLower().Equals("x"))
                 {
                     Environment.Exit(0);
                 }
                 else
                 {
-                    Console.Write("{0, 31}", "Select: ");
+                    Console.Write("{0, 32}", "Select:  ");
                     input = Console.ReadLine();
                 }
             }
