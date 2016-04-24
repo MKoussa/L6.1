@@ -5,7 +5,7 @@ At this stage of production, L6.1 exists only as a console app.
 Current functionality only includes pulling system information.
 Here is a sample output:
 
-                       L6 MKoussa
+                     L6.1 MKoussa
                 - - - - - - - - - -
             Manufacturer: LENOVO
             Model Number: 33472HU
