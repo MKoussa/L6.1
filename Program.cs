@@ -104,6 +104,7 @@ namespace L6POC
             Console.WriteLine("{0, 30} {1}", "Disk Management:", "[K]");
             Console.WriteLine("{0, 30} {1}", "Disk Cleanup:", "[C]");
             Console.WriteLine("{0, 30} {1}", "Internet Properties:", "[I]");
+            Console.WriteLine("{0, 30} {1}", "Performance Monitor:", "[P]");
             Console.WriteLine("{0, 30} {1}", "Exit:", "[X]");
             Console.Write("\n{0, 32}", "Select:  ");
             string input = Console.ReadLine();
@@ -133,6 +134,11 @@ namespace L6POC
                 else if (input.ToLower().Equals("i"))
                 {
                     WindowsTools.RunInternetProperties();
+                    input = "";
+                }
+                else if (input.ToLower().Equals("p"))
+                {
+                    WindowsTools.RunPerformanceMonitor();
                     input = "";
                 }
                 else if (input.ToLower().Equals("x"))

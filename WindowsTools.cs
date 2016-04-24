@@ -43,8 +43,16 @@ namespace L6POC
             psi.FileName = "Cleanmgr.exe";
             prcs.StartInfo = psi;
             prcs.Start();
-        } 
+        }
 
+        public static void RunPerformanceMonitor()
+        {
+            Process prcs = new Process();
+            ProcessStartInfo psi = new ProcessStartInfo();
+            psi.FileName = "perfmon.exe";
+            prcs.StartInfo = psi;
+            prcs.Start();
+        }
         public static void RunInternetProperties()
         {
             Process prcs = new Process();
