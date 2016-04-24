@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Management;
+using System.Management.Automation;
 using System.Net;
 
 namespace L6POC
@@ -19,6 +21,9 @@ namespace L6POC
         //OS Fields
         public static string OSName { get; set; }
         public static string OSArchitecture { get; set; }
+
+        //Windows Update Fields
+        public static string OSLastUpdated { get; set; }
 
         //AV Fields
         public static string AVName { get; set; }
@@ -102,6 +107,23 @@ namespace L6POC
                 OSArchitecture = value["OSArchitecture"].ToString();
             }
 
+            Collection<PSObject> PSObjects;
+            using (PowerShell ps = PowerShell.Create())
+            {
+                ps.AddCommand("Get-HotFix");
+
+                ps.AddCommand("Select-Object");
+                ps.AddParameter("Property", "InstalledOn");
+
+                ps.AddCommand("Sort-Object");
+                ps.AddParameter("Property", "InstalledOn");
+                ps.AddParameter("Descending");
+
+                PSObjects = ps.Invoke();
+            }
+
+            PSMemberInfo psmi = PSObjects[0].Properties["InstalledOn"];
+            OSLastUpdated = psmi.Value.ToString();
         }
 
         static void PullAVInfo()

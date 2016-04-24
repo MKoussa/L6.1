@@ -7,9 +7,13 @@ namespace L6POC
         static void Main(string[] args)
         {
             ComputerInformation.PullAllInfo();
+
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.SetWindowSize(90, 50);
+            Console.SetBufferSize(90, 50);
+
             printComputerInfo();
             ProcessInputOptions();
-
         }
 
         static void printComputerInfo()
@@ -25,6 +29,7 @@ namespace L6POC
                 "- - - - -",
                 "OS Name:",
                 "OS Architecture:",
+                "OS Last Updated:",
                 "- - - - -",
                 "AntiVirus:",
                 "- - - - -",
@@ -63,6 +68,7 @@ namespace L6POC
                 "- - - - -",
                 ComputerInformation.OSName,
                 ComputerInformation.OSArchitecture,
+                ComputerInformation.OSLastUpdated,
                 "- - - - -",
                 ComputerInformation.AVName,
                 "- - - - -",
@@ -90,23 +96,23 @@ namespace L6POC
                 ComputerInformation.NetworkPublicIPAddress,
                 "- - - - -" };
 
-            Console.WriteLine("{0, 30} {1}", "L6", "MKoussa");
+            Console.WriteLine("{0, 25} {1}", "L6.1", "MKoussa");
             for(int i = 0; i < names.Length; i++)
             {
-                Console.WriteLine("{0, 30} {1}", names[i], values[i]);
+                Console.WriteLine("{0, 25} {1}", names[i], values[i]);
             }
         }
 
         static void ProcessInputOptions()
         {
-            Console.WriteLine("{0, 30} {1}", "DXDiag:", "[D]");
-            Console.WriteLine("{0, 30} {1}", "MSInfo32:", "[M]");
-            Console.WriteLine("{0, 30} {1}", "Disk Management:", "[K]");
-            Console.WriteLine("{0, 30} {1}", "Disk Cleanup:", "[C]");
-            Console.WriteLine("{0, 30} {1}", "Internet Properties:", "[I]");
-            Console.WriteLine("{0, 30} {1}", "Performance Monitor:", "[P]");
-            Console.WriteLine("{0, 30} {1}", "Exit:", "[X]");
-            Console.Write("\n{0, 32}", "Select:  ");
+            Console.WriteLine("{0, 25} {1}", "DXDiag:", "[D]");
+            Console.WriteLine("{0, 25} {1}", "MSInfo32:", "[M]");
+            Console.WriteLine("{0, 25} {1}", "Disk Management:", "[K]");
+            Console.WriteLine("{0, 25} {1}", "Disk Cleanup:", "[C]");
+            Console.WriteLine("{0, 25} {1}", "Internet Properties:", "[I]");
+            Console.WriteLine("{0, 25} {1}", "Performance Monitor:", "[P]");
+            Console.WriteLine("{0, 25} {1}", "Exit:", "[X]");
+            Console.Write("\n{0, 27}", "Select:  ");
             string input = Console.ReadLine();
 
             while (!input.ToLower().Equals("x"))
@@ -147,7 +153,7 @@ namespace L6POC
                 }
                 else
                 {
-                    Console.Write("{0, 32}", "Select:  ");
+                    Console.Write("{0, 27}", "Select:  ");
                     input = Console.ReadLine();
                 }
             }
