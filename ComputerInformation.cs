@@ -40,6 +40,7 @@ namespace L6POC
         //HDD Fields
         public static string HDDModel { get; set; }
         public static string HDDDriveLetter { get; set; }
+        public static string HDDSmartFailure { get; set; }
         public static string HDDCapacity { get; set; }
         public static string HDDFreeSpace { get; set; }
 
@@ -66,7 +67,8 @@ namespace L6POC
             PullHDDInfo();
             PullVideoInfo();
             PullNetworkInfo();
-        }
+            TestHDD();
+         }
 
         static void PullSystemInfo()
         {
@@ -182,9 +184,9 @@ namespace L6POC
             ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"
                 SELECT Model
                 FROM Win32_DiskDrive");
-            ManagementObjectCollection manObjCollection = searcher.Get();
+            ManagementObjectCollection moc = searcher.Get();
 
-            foreach (ManagementObject value in manObjCollection)
+            foreach (ManagementObject value in moc)
             {
                 HDDModel += value["Model"].ToString() + " ";
             }
@@ -193,16 +195,39 @@ namespace L6POC
                 SELECT DriveLetter, Capacity, FreeSpace
                 FROM Win32_Volume
                 WHERE DriveLetter IS NOT NULL");
-            manObjCollection = searcher.Get();
+            moc = searcher.Get();
 
-            foreach (ManagementObject value in manObjCollection)
+            foreach (ManagementObject value in moc)
             {
                 HDDDriveLetter += value["DriveLetter"].ToString() + " ";
                 HDDCapacity += convertToGB(value["Capacity"].ToString()) + " ";
                 HDDFreeSpace += convertToGB(value["FreeSpace"].ToString()) + " ";
             }
 
+            /*
+            
+            */
+        }
 
+        static void TestHDD()
+        {
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher(
+                "root\\wmi",
+                "SELECT PredictFailure " +
+                "FROM MSStorageDriver_FailurePredictStatus");
+            ManagementObjectCollection moc = searcher.Get();
+
+            NameValueCollection mnvc = new NameValueCollection();
+
+            foreach (ManagementObject value in moc)
+            {
+                foreach (PropertyData pd in value.Properties)
+                {
+                    mnvc.Add(pd.Name.ToString(), pd.Value.ToString());
+                }
+            }
+
+            HDDSmartFailure = mnvc.Get("PredictFailure") + " ";
         }
 
         static void PullVideoInfo()
