@@ -32,6 +32,8 @@ namespace L6POC
         public static string ProcessorName { get; set; }
         public static string ProcessorNumberOfCores { get; set; }
         public static string ProcessorNumberOfLogicalProcessors { get; set; }
+        public static string ProcessorL2CacheSize { get; set; }
+        public static string ProcessorL3CacheSize { get; set; }
 
         //Memory Fields
         public static string MemoryCapacity { get; set; }
@@ -67,7 +69,6 @@ namespace L6POC
             PullHDDInfo();
             PullVideoInfo();
             PullNetworkInfo();
-            TestHDD();
          }
 
         static void PullSystemInfo()
@@ -152,7 +153,11 @@ namespace L6POC
         static void PullCPUInfo()
         {
             ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"
-                SELECT Name, NumberOfCores, NumberOfLogicalProcessors
+                SELECT Name, 
+                       NumberOfCores, 
+                       NumberOfLogicalProcessors, 
+                       L2CacheSize, 
+                       L3CacheSize
                 FROM Win32_Processor");
             ManagementObjectCollection manObjCollection = searcher.Get();
 
@@ -161,6 +166,8 @@ namespace L6POC
                 ProcessorName = value["Name"].ToString();
                 ProcessorNumberOfCores = value["NumberOfCores"].ToString();
                 ProcessorNumberOfLogicalProcessors = value["NumberOfLogicalProcessors"].ToString();
+                ProcessorL2CacheSize = convertKBtoMB(value["L2CacheSize"].ToString());
+                ProcessorL3CacheSize = convertKBtoMB(value["L3CacheSize"].ToString());
             }
         }
 
@@ -204,18 +211,11 @@ namespace L6POC
                 HDDFreeSpace += convertToGB(value["FreeSpace"].ToString()) + " ";
             }
 
-            /*
-            
-            */
-        }
-
-        static void TestHDD()
-        {
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher(
+            searcher = new ManagementObjectSearcher(
                 "root\\wmi",
                 "SELECT PredictFailure " +
                 "FROM MSStorageDriver_FailurePredictStatus");
-            ManagementObjectCollection moc = searcher.Get();
+            moc = searcher.Get();
 
             NameValueCollection mnvc = new NameValueCollection();
 
@@ -228,6 +228,8 @@ namespace L6POC
             }
 
             HDDSmartFailure = mnvc.Get("PredictFailure") + " ";
+
+
         }
 
         static void PullVideoInfo()
@@ -284,6 +286,16 @@ namespace L6POC
             }
         }
 
+        static string convertKBtoMB(string value)
+        {
+            double num = double.Parse(value);
+            if (num < 1024)
+            {
+                return num.ToString() + "KB";
+            }
+            num = num / 1024;
+            return Math.Round(num, 2).ToString() + "MB";
+        }
         static string convertToGB(string value)
         {
             double num = double.Parse(value);

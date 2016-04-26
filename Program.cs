@@ -10,7 +10,7 @@ namespace L6POC
 
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.SetWindowSize(90, 50);
-            Console.SetBufferSize(90, 50);
+            Console.SetBufferSize(90, 100);
 
             printComputerInfo();
             ProcessInputOptions();
@@ -36,6 +36,8 @@ namespace L6POC
                 "Processor Name:",
                 "Processor Core Count:",
                 "Logical Processors:",
+                "L2 Cache Size:",
+                "L3 Cache Size:",
                 "- - - - -",
                 "Memory Capacity:",
                 "Memory Speed:",
@@ -76,6 +78,8 @@ namespace L6POC
                 ComputerInformation.ProcessorName,
                 ComputerInformation.ProcessorNumberOfCores,
                 ComputerInformation.ProcessorNumberOfLogicalProcessors,
+                ComputerInformation.ProcessorL2CacheSize,
+                ComputerInformation.ProcessorL3CacheSize,
                 "- - - - -",
                 ComputerInformation.MemoryCapacity,
                 ComputerInformation.MemorySpeed,
