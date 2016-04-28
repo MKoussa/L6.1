@@ -52,14 +52,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="L6POC.exe" size="21432">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="L6POC.exe" size="21944">
       <assemblyIdentity name="L6POC" version="1.0.0.0" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>y+74sJFmBUeMau9hopnFSCOVxGaUirxn/A3NzBba5uA=</dsig:DigestValue>
+        <dsig:DigestValue>PW5XvUAwqPHsCsVp9U0EV+uzrW4Ie7Px0PPDndcSQOw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

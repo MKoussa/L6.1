@@ -36,6 +36,7 @@ namespace L6POC
         public static string ProcessorL3CacheSize { get; set; }
 
         //Memory Fields
+        public static string MemoryManufacturer { get; set; }
         public static string MemoryCapacity { get; set; }
         public static string MemorySpeed { get; set; }
 
@@ -174,13 +175,16 @@ namespace L6POC
         static void PullRAMInfo()
         {
             ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"
-                SELECT Capacity, Speed
+                SELECT Manufacturer, 
+                       Capacity, 
+                       Speed
                 FROM Win32_PhysicalMemory
                 WHERE Name IS NOT NULL");
             ManagementObjectCollection manObjCollection = searcher.Get();
 
             foreach (ManagementObject value in manObjCollection)
             {
+                MemoryManufacturer = value["Manufacturer"].ToString();
                 MemoryCapacity = convertToMB(value["Capacity"].ToString());
                 MemorySpeed = value["Speed"].ToString() + "mhz";
             }
