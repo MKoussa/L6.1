@@ -23,12 +23,16 @@ Here is a sample output:
           Processor Name: Intel(R) Core(TM) i5-3317U CPU @ 1.70GHz
     Processor Core Count: 2
       Logical Processors: 4
-                - - - - - - - - - -
+           L2 Cache Size: 256KB
+           L3 Cache Size: 3MB
+                - - - - - - - - -
+     Memory Manufacturer: Elpida
          Memory Capacity: 4096MB
             Memory Speed: 1333mhz
                 - - - - - - - - - -
                HDD Model: Samsung SSD 850 PRO 256GB SAMSUNG MZMPA024HMCD-000L1
      HDD Drive Letter(s): C: D:
+           SMART Failure: False,False
             HDD Capacity: 140.39GB 96.73GB
           HDD Free Space: 88.78GB 96.32GB
                 - - - - - - - - - -
@@ -42,7 +46,6 @@ Here is a sample output:
              DHCP Server: 192.168.1.125
               DNS Domain: [Hidden].local
        Public IP Address: [Hidden]
-
                 - - - - - - - - - -
                   DXDiag: [D]
                 MSInfo32: [M]
