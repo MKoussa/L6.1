@@ -6,6 +6,7 @@ namespace L6POC
     {
         static void Main(string[] args)
         {
+
             ComputerInformation.PullAllInfo();
 
             Console.ForegroundColor = ConsoleColor.Magenta;
