@@ -8,7 +8,7 @@ namespace L6POC
         {
             using(WebClient webClient = new WebClient())
             {
-                webClient.DownloadFile("http://download.piriform.com/ccsetup517.exe", "../../3rd Party Tools/CCleaner.exe");
+                webClient.DownloadFile("https://www.piriform.com/ccleaner/download/standard/", "../../3rd Party Tools/CCleaner.exe");
             }
         }
     }

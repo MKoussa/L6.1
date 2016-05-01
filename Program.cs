@@ -6,7 +6,7 @@ namespace L6POC
     {
         static void Main(string[] args)
         {
-
+            DownloadExternalTools.DownloadCCleaner();
             ComputerInformation.PullAllInfo();
 
             Console.ForegroundColor = ConsoleColor.Magenta;
@@ -122,48 +122,43 @@ namespace L6POC
             Console.WriteLine("{0, 25} {1}", "Performance Monitor:", "[P]");
             Console.WriteLine("{0, 25} {1}", "Exit:", "[X]");
             Console.Write("\n{0, 27}", "Select:  ");
-            string input = Console.ReadLine();
-
-            while (!input.ToLower().Equals("x"))
+            string input = Console.ReadLine().ToLower();
+            
+            while (true)
             {
-                if (input.ToLower().Equals("m"))
+                switch (input)
                 {
-                    WindowsTools.RunMSInfo32();
-                    input = "";
-                }
-                else if (input.ToLower().Equals("d"))
-                {
-                    WindowsTools.RunDXDiag();
-                    input = "";
-                }
-                else if (input.ToLower().Equals("k"))
-                {
-                    WindowsTools.RunDiskMGMT();
-                    input = "";
-                }
-                else if (input.ToLower().Equals("c"))
-                {
-                    WindowsTools.RunCleanManager();
-                    input = "";
-                }
-                else if (input.ToLower().Equals("i"))
-                {
-                    WindowsTools.RunInternetProperties();
-                    input = "";
-                }
-                else if (input.ToLower().Equals("p"))
-                {
-                    WindowsTools.RunPerformanceMonitor();
-                    input = "";
-                }
-                else if (input.ToLower().Equals("x"))
-                {
-                    Environment.Exit(0);
-                }
-                else
-                {
-                    Console.Write("{0, 27}", "Select:  ");
-                    input = Console.ReadLine();
+                    case "m":
+                        WindowsTools.RunMSInfo32();
+                        input = "";
+                        break;
+                    case "d":
+                        WindowsTools.RunDXDiag();
+                        input = "";
+                        break;
+                    case "k":
+                        WindowsTools.RunDiskMGMT();
+                        input = "";
+                        break;
+                    case "c":
+                        WindowsTools.RunCleanManager();
+                        input = "";
+                        break;
+                    case "i":
+                        WindowsTools.RunInternetProperties();
+                        input = "";
+                        break;
+                    case "p":
+                        WindowsTools.RunPerformanceMonitor();
+                        input = "";
+                        break;
+                    case "x":
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        Console.Write("{0, 27}", "Select:  ");
+                        input = Console.ReadLine();
+                        break;
                 }
             }
         }
